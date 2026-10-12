@@ -1,0 +1,30 @@
+=== CPU ===
+Model:              AMD Ryzen 5 5600H with Radeon Graphics
+Physical cores:     6
+Logical processors: 12
+Max clock:          3301 MHz
+
+=== RAM ===
+Total:              15.4 GB
+  module: 8 GB @ 3200 MT/s
+  module: 8 GB @ 3200 MT/s
+
+=== Disks ===
+
+FriendlyName        MediaType BusType Size(GB)
+------------        --------- ------- --------
+INTEL SSDPEKNU512GZ SSD       NVMe         477
+
+
+
+=== USB drives ===
+
+(USB version: check the drive's label/box; USB 3.x connectors are usually blue inside)
+
+=== OS ===
+Microsoft Windows 11 Pro 10.0.26200 (build 26200), 64-bit
+
+=== Java ===
+openjdk version "25.0.1" 2025-10-21
+OpenJDK Runtime Environment (build 25.0.1+8-27)
+OpenJDK 64-Bit Server VM (build 25.0.1+8-27, mixed mode, sharing)

@@ -1,0 +1,7 @@
+out/
+numbers.txt
+numbers.txt.counts
+parts/
+warmup.csv
+results_old_*.csv
+__pycache__/
