@@ -198,11 +198,19 @@ public final class ClientSession implements Runnable {
             Log.log(endpoint, "order REFUSED (" + Order.describe(items) + "): " + r.refusal());
             return;
         }
-        Order o = r.order();
+        // the ACCEPTED answer was already sent by orderAccepted(), before the order entered the queue
+    }
+
+    /**
+     * Called by Shop.placeOrder after the products were taken and BEFORE the
+     * order enters the queue. So the client always gets ACCEPTED before READY,
+     * and the log always shows ACCEPTED before PREPARING.
+     */
+    public void orderAccepted(Order o, int waitingBefore) {
         myOrders.add(o);
-        send("ACCEPTED order #" + o.id + ": " + Order.describe(items) + ", preparation time " + o.seconds + "s");
-        Log.log(endpoint, "order #" + o.id + " ACCEPTED: " + Order.describe(items)
-                + " (" + o.seconds + "s), waiting orders: " + shop.queue().size());
+        send("ACCEPTED order #" + o.id + ": " + Order.describe(o.items) + ", preparation time " + o.seconds + "s");
+        Log.log(endpoint, "order #" + o.id + " ACCEPTED: " + Order.describe(o.items)
+                + " (" + o.seconds + "s), orders waiting before it: " + waitingBefore);
     }
 
     private void deliver(String[] w) {

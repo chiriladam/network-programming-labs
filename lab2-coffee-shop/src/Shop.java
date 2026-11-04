@@ -88,7 +88,9 @@ public final class Shop {
                 if (before >= LOW_STOCK && after < LOW_STOCK) fellLow.add(e.getKey());
             }
             order = new Order(nextOrderId++, client, items);
-            queue.add(order);                       // inside the lock: queue order = order of the ids
+            client.orderAccepted(order, queue.size()); // answer ACCEPTED first (only queues a line)
+            queue.add(order);                       // then hand it to the workers; inside the lock,
+                                                    // so the queue order = the order of the ids
         }
         stockChanged();
         // the alert is sent after the lock is released, so a slow provider never blocks the stock
