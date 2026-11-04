@@ -124,7 +124,16 @@ a quantity that is not a positive number, a message that is too long, random byt
    Windows asks the first time the server starts, or run in an **administrator** PowerShell:
    `netsh advfirewall firewall add rule name="Coffee shop" dir=in action=allow protocol=TCP localport=5000`
 3. Start the server. It prints its addresses, for example `192.168.1.23:5000`.
-4. On the other computer: `scripts\client.ps1 -Server 192.168.1.23 -Port 5000`.
+4. On the other computer: `scripts\client.ps1 -Server 192.168.1.23 -Port 5000` (Windows), or on macOS/Linux:
+   ```
+   javac -d out src/*.java
+   nc -vz 192.168.1.23 5000                         # should say "succeeded"
+   java -cp out Client 192.168.1.23 5000            # client
+   java -cp out Client 192.168.1.23 5000 provider   # provider
+   java -cp out Demo 192.168.1.23 5000 many 15      # 15 clients at once
+   ```
+
+Tested: server on Windows 11, client, provider and the 15-client demo on a MacBook, over a Wi-Fi hotspot.
 
 ## Tested
 
