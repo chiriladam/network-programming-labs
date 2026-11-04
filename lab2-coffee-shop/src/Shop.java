@@ -128,16 +128,21 @@ public final class Shop {
         return null;
     }
 
-    /**
-     * Makes this connection the provider. Then sends it an alert for every
-     * product that is already below LOW_STOCK: these are the alerts it missed
-     * while it was not connected.
-     */
+    /** Makes this connection the provider; false if another provider is connected. */
     public boolean registerProvider(ClientSession session) {
         synchronized (providerLock) {
             if (provider != null) return false;     // only one provider at a time
             provider = session;
         }
+        return true;
+    }
+
+    /**
+     * Called right after a provider connects: sends it an alert for every
+     * product that is already below LOW_STOCK. These are the alerts it missed
+     * while it was not connected.
+     */
+    public void sendMissedAlerts(ClientSession session) {
         EnumMap<Product, Integer> s = snapshot();
         for (Product p : Product.values()) {
             if (s.get(p) < LOW_STOCK) {
@@ -145,7 +150,6 @@ public final class Shop {
                 Log.log(session.endpoint(), "ALERT sent on connect: " + p.label + " " + s.get(p) + " left");
             }
         }
-        return true;
     }
 
     public void unregisterProvider(ClientSession session) {

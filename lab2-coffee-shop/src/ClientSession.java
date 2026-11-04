@@ -172,6 +172,7 @@ public final class ClientSession implements Runnable {
                 isProvider = true;
                 send("OK you are the provider");
                 Log.log(endpoint, "role: PROVIDER");
+                shop.sendMissedAlerts(this);            // alerts it missed while it was away
             } else {
                 error("a provider is already connected");
             }
