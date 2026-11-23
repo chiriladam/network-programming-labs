@@ -7,3 +7,4 @@ Macari Chiril-Adam, Carazanu Augustin
 |---|---|---|
 | 1 | Concurrency in Practice | [lab1-concurrency](lab1-concurrency) |
 | 2 | A Coffee Shop Server (TCP sockets) | [lab2-coffee-shop](lab2-coffee-shop) |
+| 3 | A Local Network Chat (UDP) | [lab3-lan-chat](lab3-lan-chat) |
